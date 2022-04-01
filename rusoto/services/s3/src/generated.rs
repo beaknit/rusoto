@@ -19220,11 +19220,13 @@ impl S3Client {
     /// Creates a client backed by the default tokio event loop.
     ///
     /// The client will use the default credentials provider and tls client.
-    pub fn new(region: region::Region) -> S3Client {
+    pub fn new(region: region::Region, addr_type: crate::custom::util::AddressingStyle ) -> S3Client {
         S3Client {
             client: Client::shared(),
             region,
-            config: S3Config::default(),
+            config: S3Config {
+                addressing_style: addr_type
+            },
         }
     }
 
@@ -19232,6 +19234,7 @@ impl S3Client {
         request_dispatcher: D,
         credentials_provider: P,
         region: region::Region,
+        addr_type: crate::custom::util::AddressingStyle
     ) -> S3Client
     where
         P: ProvideAwsCredentials + Send + Sync + 'static,
@@ -19240,15 +19243,19 @@ impl S3Client {
         S3Client {
             client: Client::new_with(credentials_provider, request_dispatcher),
             region,
-            config: S3Config::default(),
+            config: S3Config {
+                addressing_style: addr_type
+            },
         }
     }
 
-    pub fn new_with_client(client: Client, region: region::Region) -> S3Client {
+    pub fn new_with_client(client: Client, region: region::Region, addr_type: crate::custom::util::AddressingStyle) -> S3Client {
         S3Client {
             client,
             region,
-            config: S3Config::default(),
+            config: S3Config {
+                addressing_style: addr_type
+            },
         }
     }
 
