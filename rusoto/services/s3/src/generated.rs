@@ -23889,6 +23889,7 @@ mod protocol_tests {
     use self::rusoto_mock::*;
     use super::*;
     use rusoto_core::Region as rusoto_region;
+    use crate::util::AddressingStyle;
 
     #[tokio::test]
     async fn test_parse_error_s3_create_bucket() {
@@ -23897,7 +23898,7 @@ mod protocol_tests {
             "s3-create-bucket.xml",
         );
         let mock = MockRequestDispatcher::with_status(400).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = CreateBucketRequest::default();
         let result = client.create_bucket(request).await;
         assert!(!result.is_ok(), "parse error: {:?}", result);
@@ -23910,7 +23911,7 @@ mod protocol_tests {
             "s3-list-objects.xml",
         );
         let mock = MockRequestDispatcher::with_status(400).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = ListObjectsRequest::default();
         let result = client.list_objects(request).await;
         assert!(!result.is_ok(), "parse error: {:?}", result);
@@ -23923,7 +23924,7 @@ mod protocol_tests {
             "s3-get-bucket-acl.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = GetBucketAclRequest::default();
         let result = client.get_bucket_acl(request).await;
         assert!(result.is_ok(), "parse error: {:?}", result);
@@ -23936,7 +23937,7 @@ mod protocol_tests {
             "s3-get-bucket-location.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = GetBucketLocationRequest::default();
         let result = client.get_bucket_location(request).await;
         assert!(result.is_ok(), "parse error: {:?}", result);
@@ -23949,7 +23950,7 @@ mod protocol_tests {
             "s3-get-bucket-logging.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = GetBucketLoggingRequest::default();
         let result = client.get_bucket_logging(request).await;
         assert!(result.is_ok(), "parse error: {:?}", result);
@@ -23962,7 +23963,7 @@ mod protocol_tests {
             "s3-get-bucket-policy.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = GetBucketPolicyRequest::default();
         let result = client.get_bucket_policy(request).await;
         assert!(result.is_ok(), "parse error: {:?}", result);
@@ -23975,7 +23976,7 @@ mod protocol_tests {
             "s3-list-buckets.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
 
         let result = client.list_buckets().await;
         assert!(result.is_ok(), "parse error: {:?}", result);
@@ -23988,7 +23989,7 @@ mod protocol_tests {
             "s3-list-multipart-uploads.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = ListMultipartUploadsRequest::default();
         let result = client.list_multipart_uploads(request).await;
         assert!(result.is_ok(), "parse error: {:?}", result);
@@ -24001,7 +24002,7 @@ mod protocol_tests {
             "s3-list-object-versions.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = ListObjectVersionsRequest::default();
         let result = client.list_object_versions(request).await;
         assert!(result.is_ok(), "parse error: {:?}", result);
@@ -24014,7 +24015,7 @@ mod protocol_tests {
             "s3-list-objects.xml",
         );
         let mock = MockRequestDispatcher::with_status(200).with_body(&mock_response);
-        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1);
+        let client = S3Client::new_with(mock, MockCredentialsProvider, rusoto_region::UsEast1, AddressingStyle::Auto);
         let request = ListObjectsRequest::default();
         let result = client.list_objects(request).await;
         assert!(result.is_ok(), "parse error: {:?}", result);
